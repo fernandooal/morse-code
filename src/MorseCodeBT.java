@@ -1,6 +1,6 @@
-package myutils;
+import myutils.Node;
 
-public class BinaryTreeMorse {
+public class MorseCodeBT {
     private Node<String> root;
 
     private static final char[] letters = {
@@ -16,7 +16,7 @@ public class BinaryTreeMorse {
             "-----",".----","..---","...--","....-",".....","-....","--...","---..","----."
     };
 
-    public BinaryTreeMorse() { root = new Node<>(""); }
+    public MorseCodeBT() { root = new Node<>(""); }
 
     public Node<String> getRoot() { return root; }
 
@@ -60,4 +60,5 @@ public class BinaryTreeMorse {
             root = insert(root, String.valueOf(letter), morseCode);
         }
     }
+
 }

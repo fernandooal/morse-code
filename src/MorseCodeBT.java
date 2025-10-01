@@ -61,4 +61,44 @@ public class MorseCodeBT {
         }
     }
 
+    private String getLetterMorse(Node<String> node, char letter) {
+        if (node == null) return null;
+
+        if (node.getElement().equals(String.valueOf(letter))) {
+            return "";
+        }
+
+        // tenta pela esquerda
+        String leftPath = getLetterMorse(node.getLeft(), letter);
+        if (leftPath != null) {
+            return "." + leftPath;
+        }
+
+        // tenta pela direita
+        String rightPath = getLetterMorse(node.getRight(), letter);
+        if (rightPath != null) {
+            return "-" + rightPath;
+        }
+
+        // não achou
+        return null;
+    }
+
+    public String encrypt(String input) {
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : input.toUpperCase().toCharArray()) {
+            if (c == ' ') {
+                sb.append("/ ");
+            } else {
+                String morse = getLetterMorse(root, c);
+                if (morse != null) {
+                    sb.append(morse).append(" ");
+                }
+            }
+        }
+
+        return sb.toString().trim();
+    }
+
 }

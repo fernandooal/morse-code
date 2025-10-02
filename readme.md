@@ -208,5 +208,7 @@ Este é um projeto acadêmico desenvolvido para fins educacionais.
 ---
 
 **Disciplina:** Resolução de Problemas Estruturados em Computação
+
 **Instituição:** PUCPR
+
 **Ano:** 2025

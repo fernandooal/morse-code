@@ -302,7 +302,7 @@ public class MorseCodeInterface extends Application {
             return;
         }
 
-        // Aqui será chamado o método decrypt que seu colega implementará
+        // Aqui será chamado o método decrypt
         try {
             // Verificar se o método existe
             String decoded = morseTree.getClass().getMethod("decrypt", String.class)

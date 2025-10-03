@@ -16,13 +16,11 @@ O programa permite inserir caracteres dinamicamente, codificar texto em Morse e 
 - ✔️ Inserção de caracteres (A-Z, 0-9) na árvore
 - ✔️ Inserção individual ou em lote (alfabeto completo/números)
 - ✔️ Codificação de texto para código Morse
+- ✔️ Decodificação de código Morse para texto
 - ✔️ Visualização gráfica da árvore binária
 - ✔️ Interface JavaFX moderna e intuitiva
 - ✔️ Validações de entrada e tratamento de erros
 - ✔️ Todas as operações implementadas de forma **recursiva**
-
-### 🔄 Em Desenvolvimento
-- ⏳ Decodificação de código Morse para texto (em implementação)
 
 ## 📐 Padronização do Código Morse
 
@@ -169,6 +167,7 @@ O sistema implementa validações completas:
 2. **Caracteres inválidos:** Aceita apenas letras (A-Z) e números (0-9)
 3. **Código Morse inválido:** Valida que só contenha pontos, traços, espaços e barras
 4. **Entrada vazia:** Verifica se há texto antes de processar
+5. Ao decodificar, se o caminho não existir na árvore (ex.: árvore incompleta), o sistema insere ? no lugar da letra inválida.
 
 ## 🎨 Interface Visual
 

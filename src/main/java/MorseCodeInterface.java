@@ -206,12 +206,7 @@ public class MorseCodeInterface extends Application {
         decodeButton.setStyle("-fx-background-color: #16a085; -fx-text-fill: white; -fx-font-weight: bold;");
         decodeButton.setOnAction(e -> decodeText(decodeField));
 
-        Label infoLabel = new Label("Nota: Seu colega implementará o método decrypt()");
-        infoLabel.setFont(Font.font("Arial", 10));
-        infoLabel.setTextFill(Color.GRAY);
-        infoLabel.setWrapText(true);
-
-        section.getChildren().addAll(sectionLabel, decodeField, decodeButton, infoLabel);
+        section.getChildren().addAll(sectionLabel, decodeField, decodeButton);
 
         return section;
     }

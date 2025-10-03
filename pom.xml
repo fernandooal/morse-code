@@ -95,7 +95,7 @@
             </dependencies>
         </profile>
 
-        <!-- MacOS -->
+        <!-- MacOS ARM -->
         <profile>
             <id>mac</id>
             <activation>
@@ -108,22 +108,29 @@
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-base</artifactId>
                     <version>${javafx.version}</version>
-                    <classifier>mac</classifier>
+                    <classifier>mac-aarch64</classifier>
                 </dependency>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
                     <version>${javafx.version}</version>
-                    <classifier>mac</classifier>
+                    <classifier>mac-aarch64</classifier>
                 </dependency>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-graphics</artifactId>
                     <version>${javafx.version}</version>
-                    <classifier>mac</classifier>
+                    <classifier>mac-aarch64</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>${javafx.version}</version>
+                    <classifier>mac-aarch64</classifier>
                 </dependency>
             </dependencies>
         </profile>
+
     </profiles>
 
     <build>

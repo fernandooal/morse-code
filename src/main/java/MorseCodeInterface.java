@@ -297,18 +297,21 @@ public class MorseCodeInterface extends Application {
             return;
         }
 
-        // Aqui será chamado o método decrypt
         try {
-            // Verificar se o método existe
-            String decoded = morseTree.getClass().getMethod("decrypt", String.class)
-                    .invoke(morseTree, input).toString();
-            updateStatus("Código morse decodificado com sucesso");
-            outputArea.setText("Código Morse: " + input + "\n\nTexto decodificado: " + decoded);
+            String decoded = morseTree.decrypt(input);
+
+            if (decoded.contains("?")) {
+                updateStatus("Decodificação concluída com alguns caracteres não reconhecidos");
+                outputArea.setText("Código Morse: " + input +
+                        "\n\nTexto decodificado: " + decoded +
+                        "\n\nNota: O símbolo '?' indica código morse não reconhecido.");
+            } else {
+                updateStatus("Código morse decodificado com sucesso");
+                outputArea.setText("Código Morse: " + input + "\n\nTexto decodificado: " + decoded);
+            }
         } catch (Exception e) {
-            showError("Método decrypt() ainda não implementado pelo seu colega.\n\n" +
-                    "Aguardando implementação da decodificação!");
-            outputArea.setText("Funcionalidade de decodificação será implementada pelo seu colega.\n\n" +
-                    "Método decrypt(String morse) ainda não está disponível na classe MorseCodeBT.");
+            showError("Erro ao decodificar: " + e.getMessage());
+            outputArea.setText("Erro ao processar o código morse. Verifique o formato de entrada.");
         }
     }
 

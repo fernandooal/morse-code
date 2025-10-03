@@ -101,4 +101,88 @@ public class MorseCodeBT {
         return sb.toString().trim();
     }
 
+    /**
+     * Decodifica uma string em código Morse para texto, usando a árvore construída.
+     * Regras:
+     * - Ponto (.) caminha para a esquerda; traço (-) para a direita.
+     * - Espaço separa letras; "/" separa palavras.
+     * - Se um caminho não levar a um nó com letra (ou a árvore não tiver esse caractere),
+     *   adiciona '?' como marcador.
+     * Implementação totalmente recursiva e sem estruturas prontas.
+     *
+     * @param morse sequência Morse (ex.: "... --- ... / ... --- ...")
+     * @return texto decodificado (ex.: "SOS SOS")
+     */
+    public String decrypt(String morse) {
+        if (morse == null) return "";
+        String cleaned = morse.trim();
+        if (cleaned.isEmpty()) return "";
+        StringBuilder out = new StringBuilder();
+        // Inicia na raiz, ainda não percorreu nenhum símbolo da letra atual (moved = false)
+        decryptRecursive(cleaned, 0, root, out, false);
+        return out.toString();
+    }
+
+    // Percorre recursivamente a string Morse e a árvore simultaneamente.
+    // idx: posição atual na string 'morse'
+    // current: nó atual na árvore para a letra em construção
+    // out: acumulador de resultado
+    // moved: indica se já percorremos ao menos um '.' ou '-' desde o último separador
+    private void decryptRecursive(String morse, int idx, Node<String> current, StringBuilder out, boolean moved) {
+        if (idx >= morse.length()) {
+            // Fim da string: fecha a última letra, se houve movimento
+            if (moved) appendLetter(current, out);
+            return;
+        }
+
+        char ch = morse.charAt(idx);
+
+        if (ch == '.') {
+            // desce à esquerda
+            decryptRecursive(morse, idx + 1, current != null ? current.getLeft() : null, out, true);
+            return;
+        }
+
+        if (ch == '-') {
+            // desce à direita
+            decryptRecursive(morse, idx + 1, current != null ? current.getRight() : null, out, true);
+            return;
+        }
+
+        if (ch == ' ') {
+            // fim de uma letra; fecha só se houve percurso desde o último separador
+            if (moved) appendLetter(current, out);
+            // reinicia na raiz para a próxima letra
+            decryptRecursive(morse, idx + 1, root, out, false);
+            return;
+        }
+
+        if (ch == '/') {
+            // fim de uma palavra; fecha a letra em curso (se houver)
+            if (moved) appendLetter(current, out);
+            // adiciona um espaço entre palavras (evita espaços duplos)
+            if (out.length() > 0 && out.charAt(out.length() - 1) != ' ') out.append(' ');
+            // reinicia na raiz para a próxima letra/palavra
+            decryptRecursive(morse, idx + 1, root, out, false);
+            return;
+        }
+
+        // Caracter inesperado (não deveria ocorrer pois a interface valida a entrada)
+        // Avança sem alterar estado para manter robustez.
+        decryptRecursive(morse, idx + 1, current, out, moved);
+    }
+
+    // Fecha a letra atual: se 'current' tem um símbolo válido, usa-o; caso contrário, insere '?'
+    private void appendLetter(Node<String> current, StringBuilder out) {
+        if (current != null) {
+            String elem = current.getElement();
+            if (elem != null && !elem.isEmpty()) {
+                out.append(elem);
+                return;
+            }
+        }
+        out.append('?');
+    }
+
+
 }
